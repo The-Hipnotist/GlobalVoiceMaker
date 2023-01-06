@@ -1,5 +1,6 @@
 from pytube import YouTube, exceptions
-import os, shutil, wave, auditok, glob, random, subprocess, time
+import os, shutil, wave, auditok, glob, random, subprocess, time, warnings
+warnings.filterwarnings("ignore")
 ytinput = input("Enter a youtube url here: ")
 try:
     yt = YouTube(ytinput)
@@ -28,7 +29,7 @@ try:
 except FileNotFoundError or subprocess.CalledProcessError:
     os.system("cls")
     print("ffmpeg is not installed. If you do have ffmpeg installed as a zip,")
-    print(" make sure to extract it and that the 'ffmpeg/bin' folder is on your C: drive and is on")
+    print(" make sure to extract it and that the 'bin' folder is on your C: drive and is on")
     print("PATH.")
     time.sleep(5)
     exit(0)
@@ -37,7 +38,6 @@ os.remove("audio.3gpp")
 os.system("cls")
 print("Done!")
 time.sleep(2)
-os.system("cls")
 os.system("cls")
 foldername = "wavs"
 folderpath = f'{foldername}/';
