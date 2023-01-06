@@ -1,4 +1,4 @@
-# voice.aiMaker
+# voice.ai Maker
 Automatically makes a voice for voice.ai
 
 ## Requirements:
