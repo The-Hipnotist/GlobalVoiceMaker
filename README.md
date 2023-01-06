@@ -1,5 +1,5 @@
 # voice.ai Maker
-Automatically makes a voice for voice.ai
+Automatically makes a voice for voice.ai built in Python.
 
 ## Requirements:
 1. `pip install requirements.txt`
