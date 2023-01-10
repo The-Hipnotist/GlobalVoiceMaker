@@ -1,6 +1,5 @@
 from pytube import YouTube, exceptions
-import os, shutil, wave, auditok, glob, random, subprocess, time, warnings
-warnings.filterwarnings("ignore")
+import os, shutil, wave, auditok, glob, random, subprocess, time
 ytinput = input("Enter a youtube url here: ")
 try:
     yt = YouTube(ytinput)
