@@ -1,5 +1,5 @@
 # GlobalVoiceMaker
-Automatically makes a voice for any AI voice program or site, made in Python. Tjis was originally made for voice.ai, but can be used for any AI site.
+Automatically makes a voice for any AI voice program or site, made in Python. This was originally made for voice.ai, but can be used for any AI site.
 
 ## Requirements:
 1. `pip install requirements.txt`
