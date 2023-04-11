@@ -1,42 +1,31 @@
-from pytube import YouTube, exceptions
-import os, shutil, wave, auditok, glob, random, subprocess, time
+import os, shutil, wave, auditok, glob, random, time, warnings, yt_dlp, glob, traceback
+warnings.filterwarnings("ignore")
+if os.path.isdir("splitaudio"):
+    shutil.rmtree("splitaudio")
 ytinput = input("Enter a youtube url here: ")
 try:
-    yt = YouTube(ytinput)
-    print(f"Downloading video ['{yt.title}'] by ['{yt.author}']...")
-except exceptions.RegexMatchError:
-    print("That is not a valid URL! Please try again!")
+    ydl_opts = {
+    'format': 'bestaudio/best',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'wav',
+        'preferredquality': '192'
+    }],
+    }
+    print(f"Downloading video...")
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([ytinput])
+    for file in glob.glob("*.wav"):
+        if os.path.exists(file):
+            os.rename(file, "mono.wav")
+except:
+    print("An error has happened.")
+    print(traceback.format_exc())
     time.sleep(2)
     exit(0)
-if os.path.exists("audio.3gpp"):
-    time.sleep(0.50)
-    print("audio.3ggp file detected, removing...")
-    os.remove("audio.3gpp")
-video = yt.streams.first()
-video.download()
+
 print("Done.")
 time.sleep(0.5)
-os.system("cls")
-for i in glob.glob("*.3gpp"):
-    os.rename(i, "audio.3gpp")
-print("Attempting to use ffmpeg to convert file to wav...")
-try:
-    subprocess.check_call(["ffmpeg", "-version"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    time.sleep(0.5)
-    print("ffmpeg has been found! Continuing...")
-    time.sleep(1)
-except FileNotFoundError or subprocess.CalledProcessError:
-    os.system("cls")
-    print("ffmpeg is not installed. If you do have ffmpeg installed as a zip,")
-    print(" make sure to extract it and that the 'bin' folder is on your C: drive and is on")
-    print("PATH.")
-    time.sleep(5)
-    exit(0)
-subprocess.run(['ffmpeg', '-y', '-i', 'audio.3gpp', '-ar', '48000', 'mono.wav'], stdout=subprocess.PIPE)
-os.remove("audio.3gpp")
-os.system("cls")
-print("Done!")
-time.sleep(2)
 os.system("cls")
 foldername = "wavs"
 folderpath = f'{foldername}/';
