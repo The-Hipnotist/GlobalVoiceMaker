@@ -79,9 +79,4 @@ else:
             totalminutes = totalminutes + duration
     totalminutes = round(totalminutes / 60, 1)
     print(f"Done! {filecount} files in the folder, {totalminutes} minutes of audio total.")
-    if totalminutes > 15.0:
-        print("There are enough audio files to train a voice now!")
-        time.sleep(3)
-    else:
-        print(f"You need {round(15.0 - totalminutes, 1)} more minutes of audio to train a voice.")
-        time.sleep(3)
+    time.sleep(3)
